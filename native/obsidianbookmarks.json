@@ -1,0 +1,7 @@
+{
+  "name": "obsidianbookmarks",
+  "description": "Native messaging for ObsidianBookmarks",
+  "path": "/Users/abhishek/mozilla/code/addons/obsidianBookmarks/native/obsidianbookmarks.py",
+  "type": "stdio",
+  "allowed_extensions": [ "obsidianBookmarks@nagekar.com" ]
+}
