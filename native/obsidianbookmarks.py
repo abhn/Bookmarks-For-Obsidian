@@ -42,11 +42,19 @@ while True:
       filename = message['category']
       tags = message['tags']
 
-      textToWrite = f'- [{title}]({url}) - {tags}\n'
+      if len(tags) > 0:
+        textToWrite = f'- [{title}]({url}) - {tags}\n'
+      else:
+        textToWrite = f'- [{title}]({url})\n'
 
-      with open(filename, "a") as file_object:
-        file_object.write(textToWrite)
-        send_message(encode_message({'message': 'success'}))
+      if filename != "uncategorized":
+        with open(filename, "a") as file_object:
+          file_object.write(textToWrite)
+          send_message(encode_message({'message': 'success'}))
+      else:
+        with open('/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/Bookmarks.md', "a") as file_object:
+          file_object.write(textToWrite)
+          send_message(encode_message({'message': 'success'}))
 
     elif message == 'query_categories':
       files = glob.glob('/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/wiki/**/*.md', recursive=True)
