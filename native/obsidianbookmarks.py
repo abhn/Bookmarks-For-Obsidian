@@ -7,6 +7,7 @@
 import json
 import sys
 import struct
+import glob
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -38,9 +39,13 @@ while True:
     if 'url' in message:
       url = message['url']
       title = message['title']
+      filename = message['category']
       textToWrite = f'- [{title}]({url})\n'
 
-      with open("/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/Bookmarks.md", "a") as file_object:
+      with open(filename, "a") as file_object:
         file_object.write(textToWrite)
-        send_message(encode_message('success'))
-    
+        send_message(encode_message({'message': 'success'}))
+
+    elif message == 'query_categories':
+      files = glob.glob('/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/wiki/**/*.md', recursive=True)
+      send_message(encode_message({'files': files, 'message': 'all_files'}))
