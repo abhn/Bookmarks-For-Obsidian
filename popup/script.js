@@ -1,9 +1,9 @@
 // SO
 function sortByKey(array, key) {
   return array.sort(function(a, b) {
-      var x = a[key]; var y = b[key];
+    var x = a[key]; var y = b[key];
 
-      return x.localeCompare(y, undefined, {sensitivity: 'base'});
+    return x.localeCompare(y, undefined, {sensitivity: 'base'});
   });
 }
 
