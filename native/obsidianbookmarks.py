@@ -40,7 +40,9 @@ while True:
       url = message['url']
       title = message['title']
       filename = message['category']
-      textToWrite = f'- [{title}]({url})\n'
+      tags = message['tags']
+
+      textToWrite = f'- [{title}]({url}) - {tags}\n'
 
       with open(filename, "a") as file_object:
         file_object.write(textToWrite)

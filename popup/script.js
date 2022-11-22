@@ -11,13 +11,15 @@ window.addEventListener('DOMContentLoaded', function() {
 
   function addBookmarkToObsidian() {
     const category = document.querySelector('#topic-selector').value;
+    const tags = document.querySelector('#tags').value;
   
     browser.tabs.query({ active:true,currentWindow:true }).then(function(tabs){
       const { url, title } = tabs[0];
       browser.runtime.sendMessage({
         category,
         url,
-        title
+        title,
+        tags
       });
     });  
   }
@@ -25,6 +27,12 @@ window.addEventListener('DOMContentLoaded', function() {
   document
   .querySelector('#submit-bookmark')
   .addEventListener('click', addBookmarkToObsidian);
+  
+  document.querySelector('#tags').addEventListener("keyup", ({key}) => {
+    if (key === "Enter") {
+      addBookmarkToObsidian();
+    }
+})
 
   browser.runtime.onMessage.addListener(message => {
     if(message.message === 'dropdown_data') {

@@ -10,6 +10,9 @@ browser.runtime.onMessage.addListener(message => {
       data: markdownFilesInVault
     })
   } else {
+    browser.tabs.query({ active:true,currentWindow:true }).then(function(tabs){
+      browser.pageAction.hide(tabs[0].id)
+    });
     port.postMessage(message);
   }
 })
@@ -28,8 +31,6 @@ port.onMessage.addListener((response) => {
         filePath
       })
     }
-
-
   }
 });
 
