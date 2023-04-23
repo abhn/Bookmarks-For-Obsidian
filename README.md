@@ -20,9 +20,7 @@ On adding the link, this is how it looks like in my markdown files
 
 ### Installation
 - Requires Python 3
-- Copy the `obsidianbookmarks.json` file to `~/Library/Application\ Support/Mozilla/NativeMessagingHosts` for MacOS (path differs between operating systems).
-- Fix the paths everywhere (sorry)
-  - Wiki directory to prefill the dropdown of all files
-  - Path to the extension's folder for the application's manifest to find the python file
-- Go to `about:debugging` and load the extension's manifest file. 
+- Install the add-on
+- Clone this repository and `cd` into it
+- Run `make`
 

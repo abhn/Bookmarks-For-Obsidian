@@ -8,6 +8,11 @@ import json
 import sys
 import struct
 import glob
+import os
+
+OBSIDIAN_VAULT_DIRECTORY="/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/wiki/"
+DEFAULT_BOOKMARKS_FILE="/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/Bookmarks.md"
+OBSIDIAN_VAULT_DIRECTORY_ALL_MD_FILES_REGEX = OBSIDIAN_VAULT_DIRECTORY + '**/*.md'
 
 # Read a message from stdin and decode it.
 def get_message():
@@ -16,12 +21,12 @@ def get_message():
     if not raw_length:
         sys.exit(0)
     message_length = struct.unpack('=I', raw_length)[0]
-    message = sys.stdin.buffer.read(message_length).decode("utf-8")
+    message = sys.stdin.buffer.read(message_length).decode('utf-8')
     return json.loads(message)
 
 # Encode a message for transmission, given its content.
 def encode_message(message_content):
-    encoded_content = json.dumps(message_content).encode("utf-8")
+    encoded_content = json.dumps(message_content).encode('utf-8')
     encoded_length = struct.pack('=I', len(encoded_content))
     #  use struct.pack("10s", bytes), to pack a string of the length of 10 characters
     return {'length': encoded_length, 'content': struct.pack(str(len(encoded_content))+"s",encoded_content)}
@@ -47,15 +52,15 @@ while True:
       else:
         textToWrite = f'- [{title}]({url})\n'
 
-      if filename != "uncategorized":
-        with open(filename, "a") as file_object:
+      if filename != 'uncategorized':
+        with open(filename, 'a') as file_object:
           file_object.write(textToWrite)
           send_message(encode_message({'message': 'success'}))
       else:
-        with open('/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/Bookmarks.md', "a") as file_object:
+        with open(DEFAULT_BOOKMARKS_FILE, 'a') as file_object:
           file_object.write(textToWrite)
           send_message(encode_message({'message': 'success'}))
 
     elif message == 'query_categories':
-      files = glob.glob('/Users/abhishek/Library/Mobile Documents/iCloud~md~obsidian/Documents/vault-abhn/wiki/**/*.md', recursive=True)
+      files = glob.glob(OBSIDIAN_VAULT_DIRECTORY_ALL_MD_FILES_REGEX, recursive=True)
       send_message(encode_message({'files': files, 'message': 'all_files'}))
