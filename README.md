@@ -1,5 +1,5 @@
 # Firefox Bookmarks to Obsidian
-A Mozilla Firefox addon to add a page action (a button in your address bar's right corner) to directly save the current webpage in markdown files.
+A Mozilla Firefox addon to add a page action (a button in your address bar's right corner) to directly save the current webpage's title and URL in markdown files.
 
 NOTE that this addon is made very specifically for my usecase and most likely won't work for you out of the box.
 
