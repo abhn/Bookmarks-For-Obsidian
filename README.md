@@ -1,7 +1,7 @@
 # Firefox Bookmarks to Obsidian
 A Mozilla Firefox addon to add a page action (a button in your address bar's right corner) to directly save the current webpage's title and URL in markdown files.
 
-NOTE that this addon is made very specifically for my usecase and most likely won't work for you out of the box.
+NOTE that this addon is made very specifically for my usecase and most likely won't work for you out of the box without modification. Made for MacOS but should work on other platforms (see note in Installation section)
 
 ### My setup
 I have an iCloud folder that opens in Obsidian where I make notes. It is heavily inspired by [Nikita's Knowledge repository](https://github.com/nikitavoloboev/knowledge).
@@ -22,5 +22,7 @@ On adding the link, this is how it looks like in my markdown files
 - Requires Python 3
 - Install the add-on
 - Clone this repository and `cd` into it
+- Note: If you're not on MacOS, update Makefile and replace the location of NativeMessagingHosts folder with the appropriate path for your platform
+- Note: Update the paths in the files under `native` directory to match your setup
 - Run `make`
 
